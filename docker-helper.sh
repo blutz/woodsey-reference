@@ -5,7 +5,7 @@ if [ $1 ] ; then
         docker run -v /Users/byron/unicamp/woodsey-reference/code:/woodsey -p 0.0.0.0:8000:8000 -it blutz/django-postgres /bin/bash
     elif [ $1 = "inspect" ]
     then
-        docker exec -it $1 /bin/bash
+        docker exec -it $2 /bin/bash
     elif [ $1 = "port-forward" ]
     then
         boot2docker ssh -Nf -L 8000:0.0.0.0:8000 &
