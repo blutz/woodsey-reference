@@ -69,6 +69,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get install -y git
     sudo apt-get install -y ruby
     sudo apt-get install -y mysql-server
+    sudo apt-get install -y nodejs
     gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
     curl -sSL https://get.rvm.io | bash -s stable --rails
     ~/.rvm/scripts/rvm install 2.2.0
