@@ -6,11 +6,13 @@ class ApplicationController < ActionController::Base
   layout "application"
 
   def index
+    session[:hi] = 'ho'
   end
 
   private
 
   def log_in(user)
+    reset_session # Prevent session fixation
     session[:user_id] = user.id
   end
 

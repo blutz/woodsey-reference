@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+  get 'logout', to: 'sessions#destroy'
 
   get 'app', to: 'main#app', as: 'app'
   get '/register', to: 'main#index', as: 'register'
