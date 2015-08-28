@@ -3,15 +3,18 @@
     <h1>Woodsey Reference</h1>
     Sign in here.
     <div ng-controller='LoginCtrl'>
-      <form novalidate ng-submit='login()'>
+      {{ form }}
+      {{ form.$submitted }}
+      <form novalidate ng-submit='login()' name='form'>
         <label>
           Email
-          <input type='text' ng-model='user.email' required />
-          {{ user.email.errors }}
+          <input type='text' ng-model='user.email' name='email' required />
+          {{ form.email.$error }}
         </label>
         <label>
           Password
-          <input type='password' ng-model='user.password' />
+          <input type='password' ng-model='user.password' name='password' required />
+          {{ form.password.$error }}
         </label>
         <input type='submit' value='Login' />
       </form>
