@@ -2,25 +2,25 @@
   <div class='small-6 small-offset-3 columns'>
     <h1>Woodsey Reference</h1>
     Sign in here.
-    <div ng-controller='LoginCtrl'>
-      {{ form }}
-      {{ form.$submitted }}
+    <div ng-controller='LoginCtrl' ng-cloak>
       <form novalidate ng-submit='login()' name='form'>
-        <label>
+        <label ng-class='{error: hasVisibleError(form.email)}'>
           Email
-          <input type='text' ng-model='user.email' name='email' required />
-          {{ form.email.$error }}
+          <input ng-class='{error: hasVisibleError(form.email)}' type='email' ng-model='user.email' name='email' required />
+          <small class='error' ng-if='hasVisibleError(form.email)'>
+            {{ singleErrorMessage(form.email) }}
+          </small>
         </label>
-        <label>
+        <label ng-class='{error: hasVisibleError(form.password)}'>
           Password
-          <input type='password' ng-model='user.password' name='password' required />
-          {{ form.password.$error }}
+          <input ng-class='{error: hasVisibleError(form.password)}' type='password' ng-model='user.password' name='password' minlength='6' required />
+          <small class='error' ng-if='hasVisibleError(form.password)'>
+            {{ singleErrorMessage(form.password) }}
+          </small>
         </label>
         <input type='submit' value='Login' />
       </form>
       {{ user }}
-      {{ user.email }}
-      {{ user.password }}
     </div>
     <br />
   </div>

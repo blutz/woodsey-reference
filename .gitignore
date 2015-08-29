@@ -5,3 +5,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+
+*.swp
