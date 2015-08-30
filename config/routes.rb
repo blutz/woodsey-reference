@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # resources :users
   post 'users', to: 'users#create'
 
+  get 'sessions', to: 'sessions#show'
+
 
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
