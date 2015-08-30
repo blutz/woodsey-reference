@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   post 'users', to: 'users#create'
 
 
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
-  get 'logout', to: 'sessions#destroy'
+  post 'login', to: 'user_sessions#create'
+  delete 'logout', to: 'user_sessions#destroy'
+  get 'logout', to: 'user_sessions#destroy'
 
   get 'app', to: 'main#app', as: 'app'
   get '/register', to: 'main#index', as: 'register'
