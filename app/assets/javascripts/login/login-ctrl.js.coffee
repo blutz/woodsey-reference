@@ -1,6 +1,7 @@
 wrApp = angular.module('wrApp', [])
 
 wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($scope, $http, WrApi, WrErrorMessages) ->
+  DEFAULT_ERROR = "Sorry, the form could not be submitted and we're not sure what went wrong. Please try again later and report this error."
   FORM_TYPES = {
     'login': 0,
     'register': 1,
@@ -35,6 +36,8 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
   failedRegistration = (r) ->
     if r.data.email? and 'has already been taken' in r.data.email
       $scope.formError = "It looks like you've already registered for an account with that email address. Try resetting your password."
+    else
+      $scope.formError = DEFAULT_ERROR
 
   login = () ->
     $scope.submitting = true
@@ -48,5 +51,5 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
     else if r.status == 404
       $scope.formError = "We couldn't find that account. Have you registered yet?"
     else
-      $scope.formError = "Sorry, the form could not be submitted and we're not sure what went wrong. Please try again later and report this error."
+      $scope.formError = DEFAULT_ERROR
 ]
