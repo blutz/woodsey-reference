@@ -1,10 +1,14 @@
 <div class='row'>
   <div class='small-6 small-offset-3 columns'>
     <h1>Woodsey Reference</h1>
-    Sign in here.
     <div ng-controller='LoginCtrl' ng-cloak>
       <wr-alert alert-on='formError' class='alert'>{{ formError }}</wr-alert>
-      <form novalidate ng-submit='submitLoginForm()' name='form'>
+      <div ng-show='thankYou'>
+        <strong>Thanks!</strong>
+        {{ thankYou }}
+      </div>
+      <form novalidate ng-submit='submitLoginForm()' name='form' ng-hide='thankYou'>
+        Sign in here.
         <fieldset ng-if='formType == FORM_TYPES.register' ng-disabled='submitting'>
           <label>
             Registration code

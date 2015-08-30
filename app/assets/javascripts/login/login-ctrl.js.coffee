@@ -11,10 +11,17 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
   $scope.formSubmitted = false
   $scope.submitting = false
   $scope.formError = ''
+  $scope.thankYou = ''
   $scope.hasVisibleError =
     (field) -> WrErrorMessages.hasVisibleError(field, $scope.formSubmitted)
 
+  $scope.$watch('formError', (newVal, oldVal) ->
+    if newVal != oldVal
+      $("html, body").animate({ scrollTop: 0 }, 250)
+  )
+
   $scope.submitLoginForm = () ->
+    $scope.formError = ''
     $scope.formSubmitted = true
     if $scope.form.$valid
       if $scope.formType == FORM_TYPES.login then login() else register()
@@ -24,11 +31,10 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
     WrApi.register($scope.user).then(successfulRegistration, failedRegistration)
       .finally(() -> $scope.submitting = false)
   successfulRegistration = (r) ->
-    console.log 'success'
-    console.log r
+    $scope.thankYou = "A confirmation email has been sent to #{$scope.user.email}. Please click on the link in the email to activate your account."
   failedRegistration = (r) ->
-    console.log 'fail'
-    console.log r
+    if r.data.email? and 'has already been taken' in r.data.email
+      $scope.formError = "It looks like you've already registered for an account with that email address. Try resetting your password."
 
   login = () ->
     $scope.submitting = true
