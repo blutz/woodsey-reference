@@ -1,4 +1,4 @@
-wrApp = angular.module('wrApp', [])
+wrApp = angular.module('wrApp')
 
 wrApp.factory 'wrErrorMessages', () ->
   DEFAULT_ERROR_MESSAGE = "Please fill this out correctly"

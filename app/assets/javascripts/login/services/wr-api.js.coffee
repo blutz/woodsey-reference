@@ -1,4 +1,4 @@
-wrApp = angular.module('wrApp', [])
+wrApp = angular.module('wrApp')
 
 wrApp.factory 'wrApi', ['$http', ($http) ->
   # Set up CSRF tokens

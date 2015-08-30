@@ -1,4 +1,4 @@
-wrApp = angular.module('wrApp', [])
+wrApp = angular.module('wrApp')
 
 wrApp.directive 'wrAlert', () ->
   template = "
