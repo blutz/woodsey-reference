@@ -7,8 +7,7 @@ wrApp.directive 'loginErrorMessage', ['wrErrorMessages', (WrErrorMessages) ->
     </small>
   "
   link = (scope, element, attrs) ->
-    formSubmitted = scope.$parent.formSubmitted
-    scope.hasVisibleError = (field) -> WrErrorMessages.hasVisibleError(field, formSubmitted)
+    scope.hasVisibleError = (field) -> WrErrorMessages.hasVisibleError(field, scope.$parent.formSubmitted)
     scope.singleErrorMessage = WrErrorMessages.singleErrorMessage
 
   return {

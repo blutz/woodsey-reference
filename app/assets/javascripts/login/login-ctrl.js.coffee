@@ -1,7 +1,14 @@
 wrApp = angular.module('wrApp', [])
 
 wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($scope, $http, WrApi, WrErrorMessages) ->
+  FORM_TYPES = {
+    'login': 0,
+    'register': 1,
+  }
+  $scope.FORM_TYPES = FORM_TYPES
+  $scope.formType = FORM_TYPES.login
   $scope.formSubmitted = false
+  $scope.submitting = false
   $scope.formError = ''
   $scope.hasVisibleError =
     (field) -> WrErrorMessages.hasVisibleError(field, $scope.formSubmitted)
@@ -9,7 +16,8 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
   $scope.login = () ->
     $scope.formSubmitted = true
     if $scope.form.$valid
-      WrApi.login($scope.user).then(successfulLogin, failedLogin)
+      $scope.submitting = true
+      WrApi.login($scope.user).then(successfulLogin, failedLogin).finally(() -> $scope.submitting = false)
   successfulLogin = (r) ->
     window.location = '/app'
   failedLogin = (r) ->
