@@ -3,6 +3,7 @@
     <h1>Woodsey Reference</h1>
     Sign in here.
     <div ng-controller='LoginCtrl' ng-cloak>
+      <wr-alert alert-on='formError' class='alert'>{{ formError }}</wr-alert>
       <form novalidate ng-submit='login()' name='form'>
         <label ng-class='{error: hasVisibleError(form.email)}'>
           Email
@@ -20,7 +21,6 @@
         </label>
         <input type='submit' value='Login' />
       </form>
-      {{ user }}
     </div>
     <br />
   </div>
