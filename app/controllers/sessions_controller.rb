@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    render :nothing => true, :status => :ok
   end
 
   private
