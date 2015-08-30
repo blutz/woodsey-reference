@@ -4,7 +4,7 @@
     Sign in here.
     <div ng-controller='LoginCtrl' ng-cloak>
       <wr-alert alert-on='formError' class='alert'>{{ formError }}</wr-alert>
-      <form novalidate ng-submit='login()' name='form'>
+      <form novalidate ng-submit='submitLoginForm()' name='form'>
         <fieldset ng-if='formType == FORM_TYPES.register' ng-disabled='submitting'>
           <label>
             Registration code

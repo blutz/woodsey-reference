@@ -6,8 +6,11 @@ wrApp.factory 'wrApi', ['$http', ($http) ->
   $http.defaults.headers.common['X-CSRF-Token'] = csrfToken
 
   login = (user) -> $http.post('/login', user)
+  register = (user) ->
+    $http.post('/users', user)
 
   return {
     login: login
+    register: register
   }
 ]

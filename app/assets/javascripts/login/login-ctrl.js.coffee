@@ -7,17 +7,33 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
   }
   $scope.FORM_TYPES = FORM_TYPES
   $scope.formType = FORM_TYPES.login
+  $scope.user = {}
   $scope.formSubmitted = false
   $scope.submitting = false
   $scope.formError = ''
   $scope.hasVisibleError =
     (field) -> WrErrorMessages.hasVisibleError(field, $scope.formSubmitted)
 
-  $scope.login = () ->
+  $scope.submitLoginForm = () ->
     $scope.formSubmitted = true
     if $scope.form.$valid
-      $scope.submitting = true
-      WrApi.login($scope.user).then(successfulLogin, failedLogin).finally(() -> $scope.submitting = false)
+      if $scope.formType == FORM_TYPES.login then login() else register()
+
+  register = () ->
+    $scope.submitting = true
+    WrApi.register($scope.user).then(successfulRegistration, failedRegistration)
+      .finally(() -> $scope.submitting = false)
+  successfulRegistration = (r) ->
+    console.log 'success'
+    console.log r
+  failedRegistration = (r) ->
+    console.log 'fail'
+    console.log r
+
+  login = () ->
+    $scope.submitting = true
+    WrApi.login($scope.user).then(successfulLogin, failedLogin)
+      .finally(() -> $scope.submitting = false)
   successfulLogin = (r) ->
     window.location = '/app'
   failedLogin = (r) ->
