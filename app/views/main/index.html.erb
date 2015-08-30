@@ -8,16 +8,12 @@
         <label ng-class='{error: hasVisibleError(form.email)}'>
           Email
           <input ng-class='{error: hasVisibleError(form.email)}' type='email' ng-model='user.email' name='email' required />
-          <small class='error' ng-if='hasVisibleError(form.email)'>
-            {{ singleErrorMessage(form.email) }}
-          </small>
+          <login-error-message for='form.email' />
         </label>
         <label ng-class='{error: hasVisibleError(form.password)}'>
           Password
           <input ng-class='{error: hasVisibleError(form.password)}' type='password' ng-model='user.password' name='password' minlength='6' required />
-          <small class='error' ng-if='hasVisibleError(form.password)'>
-            {{ singleErrorMessage(form.password) }}
-          </small>
+          <login-error-message for='form.password' />
         </label>
         <input type='submit' value='Login' />
       </form>
