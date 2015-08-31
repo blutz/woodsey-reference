@@ -1,6 +1,6 @@
-wrApp = angular.module('wrApp', [])
+wrApp = angular.module('wrApp', ['ngRoute'])
 
-wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($scope, $http, WrApi, WrErrorMessages) ->
+wrApp.controller 'LoginCtrl', ['$scope', '$http', '$routeParams', 'wrApi', 'wrErrorMessages', ($scope, $http, $routeParams, WrApi, WrErrorMessages) ->
   DEFAULT_ERROR = "Sorry, the form could not be submitted and we're not sure what went wrong. Please try again later and report this error."
   FORM_TYPES = {
     'login': 0,

@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require vendor/foundation/foundation
 //= require vendor/angular
+//= require vendor/angular-route
 //= require ./login/login-ctrl
 //= require_tree ./login
 //= require_self

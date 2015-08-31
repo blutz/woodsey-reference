@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def get_session_by_registration_code(code)
+    s = Session.where 'lower(registration_code) = ?', code.downcase
+    s.any? ? s[0] : nil
+  end
+
   def log_in(user)
     reset_session # Prevent session fixation
     session[:user_id] = user.id

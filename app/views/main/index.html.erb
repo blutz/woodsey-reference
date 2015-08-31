@@ -41,7 +41,7 @@
             <login-error-message for='form.password' />
           </label>
         </fieldset>
-        <input type='submit' value='Login' ng-disabled='(isRegistrationForm() && !form.registrationCode.$valid)'/>
+        <input type='submit' value='{{ isRegistrationForm() ? "Register" : "Login" }}' ng-disabled='(isRegistrationForm() && !form.registrationCode.$valid)'/>
         <a href='' ng-click='formType = FORM_TYPES.register' ng-hide='isRegistrationForm()'>Don't have an account? Register a new one!</a>
         <a href='' ng-click='formType = FORM_TYPES.login' ng-hide='isLoginForm()'>Have an account already? Sign in!</a>
       </form>
