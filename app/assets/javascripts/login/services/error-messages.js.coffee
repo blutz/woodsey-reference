@@ -6,6 +6,7 @@ wrApp.factory 'wrErrorMessages', () ->
     'required': 'This is required',
     'email': "This doesn't look like an email address",
     'minlength': "This isn't long enough",
+    'registrationCode': "That's not a valid registration code. Make sure you typed it correctly."
   }
   ERROR_MESSAGES_BY_FIELD = {
     'password': {

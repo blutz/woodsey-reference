@@ -13,12 +13,24 @@ wrApp.controller 'LoginCtrl', ['$scope', '$http', 'wrApi', 'wrErrorMessages', ($
   $scope.submitting = false
   $scope.formError = ''
   $scope.thankYou = ''
+  $scope.sessionName = ''
+  $scope.isRegistrationForm = () -> $scope.formType == FORM_TYPES.register
+  $scope.isLoginForm = () -> $scope.formType == FORM_TYPES.login
   $scope.hasVisibleError =
     (field) -> WrErrorMessages.hasVisibleError(field, $scope.formSubmitted)
 
   $scope.$watch('formError', (newVal, oldVal) ->
     if newVal != oldVal
       $("html, body").animate({ scrollTop: 0 }, 250)
+  )
+
+  $scope.$watch('user.registrationCode', (newVal, oldVal) ->
+    WrApi.getSessionByRegistrationCode(newVal)
+      .then((r) ->
+        $scope.sessionName = r.data.name
+      , (r) ->
+        $scope.sessionName = ''
+      )
   )
 
   $scope.submitLoginForm = () ->

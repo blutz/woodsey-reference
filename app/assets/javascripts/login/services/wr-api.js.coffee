@@ -8,9 +8,12 @@ wrApp.factory 'wrApi', ['$http', ($http) ->
   login = (user) -> $http.post('/login', user)
   register = (user) ->
     $http.post('/users', user)
+  getSessionByRegistrationCode = (code) ->
+    $http.get('/sessions', {params: {registrationCode: code}})
 
   return {
     login: login
     register: register
+    getSessionByRegistrationCode: getSessionByRegistrationCode
   }
 ]
