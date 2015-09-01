@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get 'app', to: 'main#app', as: 'app'
   get '/register', to: 'main#index', as: 'register'
   get '/', to: 'main#index', as: 'home'
+  get '/login', to: 'main#index'
+  get '/register/:code', to: 'main#index'
 end

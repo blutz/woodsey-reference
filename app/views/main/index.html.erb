@@ -1,51 +1,8 @@
 <div class='row'>
   <div class='small-6 small-offset-3 columns'>
     <h1>Woodsey Reference</h1>
-    <div ng-controller='LoginCtrl' ng-cloak>
-      <wr-alert alert-on='formError' class='alert'>{{ formError }}</wr-alert>
-      <div ng-show='thankYou'>
-        <strong>Thanks!</strong>
-        {{ thankYou }}
-      </div>
-      <form novalidate ng-submit='submitLoginForm()' name='form' ng-hide='thankYou'>
-        Sign in here.
-        <fieldset ng-if='isRegistrationForm()' ng-disabled='submitting'>
-          <span ng-if='sessionName'>Registering for {{sessionName}}.</span>
-          <a ng-if='sessionName' ng-click='user.registrationCode = ""'>(Not your session?)</a>
-          <label ng-hide='form.registrationCode.$valid'>
-            Registration code
-            <input ng-class='{error: hasVisibleError(form.registrationCode)}' type='text' ng-model='user.registrationCode' name='registrationCode' required wr-registration-code />
-            <login-error-message for='form.registrationCode' />
-        </fieldset>
-        <fieldset ng-if='isRegistrationForm()' ng-disabled='submitting || (isRegistrationForm() && !form.registrationCode.$valid)'>
-          <label ng-class='{error: hasVisibleError(form.campName)}'>
-            Camp name
-            <input ng-class='{error: hasVisibleError(form.campName)}' type='text' ng-model='user.campName' name='campName' required />
-            <login-error-message for='form.campName' />
-          </label>
-          <label ng-class='{error: hasVisibleError(form.realName)}'>
-            Real name
-            <input ng-class='{error: hasVisibleError(form.realName)}' type='text' ng-model='user.realName' name='realName' required />
-            <login-error-message for='form.realName' />
-          </label>
-        </fieldset>
-        <fieldset ng-disabled='submitting || (isRegistrationForm() && !form.registrationCode.$valid)'>
-          <label ng-class='{error: hasVisibleError(form.email)}'>
-            Email
-            <input ng-class='{error: hasVisibleError(form.email)}' type='email' ng-model='user.email' name='email' required />
-            <login-error-message for='form.email' />
-          </label>
-          <label ng-class='{error: hasVisibleError(form.password)}'>
-            Password
-            <input ng-class='{error: hasVisibleError(form.password)}' type='password' ng-model='user.password' name='password' minlength='6' required />
-            <login-error-message for='form.password' />
-          </label>
-        </fieldset>
-        <input type='submit' value='{{ isRegistrationForm() ? "Register" : "Login" }}' ng-disabled='(isRegistrationForm() && !form.registrationCode.$valid)'/>
-        <a href='' ng-click='formType = FORM_TYPES.register' ng-hide='isRegistrationForm()'>Don't have an account? Register a new one!</a>
-        <a href='' ng-click='formType = FORM_TYPES.login' ng-hide='isLoginForm()'>Have an account already? Sign in!</a>
-      </form>
+    <div ng-controller='MainCtrl'>
+      <div ng-view ></div>
     </div>
-    <br />
   </div>
 </div>

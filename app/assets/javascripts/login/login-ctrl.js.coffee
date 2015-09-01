@@ -1,14 +1,37 @@
 wrApp = angular.module('wrApp', ['ngRoute'])
 
-wrApp.controller 'LoginCtrl', ['$scope', '$http', '$routeParams', 'wrApi', 'wrErrorMessages', ($scope, $http, $routeParams, WrApi, WrErrorMessages) ->
-  DEFAULT_ERROR = "Sorry, the form could not be submitted and we're not sure what went wrong. Please try again later and report this error."
-  FORM_TYPES = {
-    'login': 0,
-    'register': 1,
-  }
-  $scope.FORM_TYPES = FORM_TYPES
-  $scope.formType = FORM_TYPES.login
+FORM_TYPES = {
+  'login': 0,
+  'register': 1,
+}
+
+wrApp.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+  TEMPLATE_BASE = '/assets/login/partials'
+  $routeProvider.when('/login', {
+      templateUrl: "#{TEMPLATE_BASE}/login-register.html"
+      controller: 'LoginCtrl'
+      resolve: {form: () -> FORM_TYPES.login}
+    }).when('/register/:code?', {
+      templateUrl: "#{TEMPLATE_BASE}/login-register.html"
+      controller: 'LoginCtrl'
+      resolve: {form: () -> FORM_TYPES.register}
+    }).otherwise({
+      redirectTo: '/login'
+    })
+
+  $locationProvider.html5Mode(true)
+])
+
+wrApp.controller 'MainCtrl', ['$scope', '$route', ($scope, $route) ->
   $scope.user = {}
+]
+
+wrApp.controller 'LoginCtrl', ['$scope', '$http', '$routeParams', 'wrApi', 'wrErrorMessages', 'form', ($scope, $http, $routeParams, WrApi, WrErrorMessages, form) ->
+  DEFAULT_ERROR = "Sorry, the form could not be submitted and we're not sure what went wrong. Please try again later and report this error."
+  $scope.FORM_TYPES = FORM_TYPES
+  $scope.formType = form
+  if $routeParams.code?
+    $scope.user.registrationCode = $routeParams.code
   $scope.formSubmitted = false
   $scope.submitting = false
   $scope.formError = ''
